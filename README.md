@@ -17,18 +17,39 @@ For use in the browser, use [browserify](https://github.com/substack/node-browse
 ## Usage
 
 ``` javascript
-var foo = require( 'validate.io-boolean-primitive-array' );
+var isBooleanArray = require( 'validate.io-boolean-primitive-array' );
 ```
 
-#### foo( value )
+#### isBooleanArray( value )
 
-What does this function do?
+Validates if a `value` is an `array` of `boolean` primitives.
+
+``` javascript
+var arr = [ true, false, true ];
+
+var bool = isBooleanArray( arr );
+// returns true
+```
+
+__Note__: the method will return `false` for an empty `array`.
 
 
 ## Examples
 
 ``` javascript
-var foo = require( 'validate.io-boolean-primitive-array' );
+var isBooleanArray = require( 'validate.io-boolean-primitive-array' );
+
+console.log( isBooleanArray( [true,false,true] ) );
+// returns true
+
+console.log( isBooleanArray( [true,false,new Boolean( true )] ) );
+// returns false
+
+console.log( isBooleanArray( [] ) );
+// returns false
+
+console.log( isBooleanArray( ['a',1] ) );
+// returns false
 ```
 
 To run the example code from the top-level application directory,

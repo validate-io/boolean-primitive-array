@@ -7,7 +7,7 @@ var // Expectation library:
 	chai = require( 'chai' ),
 
 	// Module to be tested:
-	lib = require( './../lib' );
+	isBooleanArray = require( './../lib' );
 
 
 // VARIABLES //
@@ -21,9 +21,35 @@ var expect = chai.expect,
 describe( 'validate.io-boolean-primitive-array', function tests() {
 
 	it( 'should export a function', function test() {
-		expect( lib ).to.be.a( 'function' );
+		expect( isBooleanArray ).to.be.a( 'function' );
 	});
 
-	it( 'should do something' );
+	it( 'should positively validate', function test() {
+		var bool = isBooleanArray( [true,false,true] );
+		assert.ok( bool );
+	});
+
+	it( 'should negatively validate', function test() {
+		var values = [
+			5,
+			'5',
+			null,
+			undefined,
+			true,
+			NaN,
+			function(){},
+			[],
+			{},
+			[true, new Boolean(true)],
+			[true,null,true]
+		];
+
+		for ( var i = 0; i < values.length; i++ ) {
+			assert.notOk( badValue( values[i] ) );
+		}
+		function badValue( value ) {
+			return isBooleanArray( value );
+		}
+	});
 
 });
